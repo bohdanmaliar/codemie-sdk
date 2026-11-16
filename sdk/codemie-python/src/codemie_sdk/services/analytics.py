@@ -11,7 +11,6 @@ from ..models.analytics import (
     CliAnalyticsSessionsQueryParams,
     CliAnalyticsSessionsResponse,
     CliAnalyticsUsersResponse,
-    HeadroomByStrategyQueryParams,
     PaginatedAnalyticsQueryParams,
     SummariesResponse,
     TabularResponse,
@@ -73,13 +72,12 @@ class AnalyticsService:
         )
 
     def get_headroom_by_strategy(
-        self, params: HeadroomByStrategyQueryParams | None = None
+        self, params: PaginatedAnalyticsQueryParams | None = None
     ) -> TabularResponse:
         """Get Headroom savings broken down by compression strategy.
 
         Args:
-            params: Query parameters (time filters, user/project filters,
-                pagination)
+            params: Query parameters (filters + pagination)
 
         Returns:
             TabularResponse with one row per strategy and pagination metadata

@@ -46,6 +46,8 @@ class HeadroomSavings(BaseModel):
     tokens_original: int
     tokens_compacted: int
     tokens_saved: int
+    # Open strings, not HeadroomStrategy, so values the backend adds later
+    # (e.g. mode="mixed") still parse.
     mode: str
     strategy: str | None = None
     calls: int = 1

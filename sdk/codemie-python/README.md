@@ -13,6 +13,7 @@ Python SDK for CodeMie services. This SDK provides a comprehensive interface to 
     - [Core Methods](#core-methods)
     - [Advanced Features](#advanced-features)
     - [Prompt Variables Support](#prompt-variables-support)
+    - [Headroom (token compression)](#headroom-token-compression)
     - [Assistant Versioning](#assistant-versioning)
   - [Datasource Service](#datasource-service)
     - [Supported Datasource Types](#supported-datasource-types)
@@ -335,13 +336,13 @@ Message history items (`HistoryItem.headroom`) and `TokensUsage.headroom` carry 
 
 Analytics methods return a 404 when the backend feature is disabled:
 ```python
-from codemie_sdk.models.analytics import AnalyticsQueryParams, HeadroomByStrategyQueryParams
+from codemie_sdk.models.analytics import AnalyticsQueryParams, PaginatedAnalyticsQueryParams
 
 params = AnalyticsQueryParams(time_period="last_7_days")
 summary = client.analytics.get_headroom_summary(params)
 timeseries = client.analytics.get_headroom_timeseries(params)
 by_strategy = client.analytics.get_headroom_by_strategy(
-    HeadroomByStrategyQueryParams(time_period="last_7_days", page=0, per_page=20)
+    PaginatedAnalyticsQueryParams(time_period="last_7_days", page=0, per_page=20)
 )
 ```
 

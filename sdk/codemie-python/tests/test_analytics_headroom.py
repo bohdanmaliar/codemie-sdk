@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 from codemie_sdk.models.analytics import (
     AnalyticsQueryParams,
-    HeadroomByStrategyQueryParams,
+    PaginatedAnalyticsQueryParams,
     SummariesResponse,
     TabularResponse,
 )
@@ -105,7 +105,7 @@ def test_headroom_by_strategy_sends_pagination_and_filters():
     result, kwargs = _call(
         "get_headroom_by_strategy",
         _TABULAR_BODY,
-        HeadroomByStrategyQueryParams(page=2, per_page=5, **FILTERS),
+        PaginatedAnalyticsQueryParams(page=2, per_page=5, **FILTERS),
     )
     assert isinstance(result, TabularResponse)
     assert result.pagination.total_count == 1
@@ -116,10 +116,3 @@ def test_headroom_by_strategy_sends_pagination_and_filters():
 def test_headroom_by_strategy_without_params_sends_no_query():
     _, kwargs = _call("get_headroom_by_strategy", _TABULAR_BODY)
     assert kwargs["params"] == {}
-
-
-def test_headroom_by_strategy_params_have_no_assistant_or_client_filters():
-    params = HeadroomByStrategyQueryParams(
-        assistant_id="a-1", client_source="platform"
-    ).model_dump(exclude_none=True)
-    assert params == {"page": 0, "per_page": 20}

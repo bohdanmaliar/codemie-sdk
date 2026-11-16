@@ -156,13 +156,6 @@ class PaginatedAnalyticsQueryParams(AnalyticsQueryParams):
     )
 
 
-class HeadroomByStrategyQueryParams(AnalyticsQueryParams):
-    """Query parameters of the Headroom by-strategy endpoint."""
-
-    page: int = Field(0, description="Zero-indexed page number")
-    per_page: int = Field(20, description="Items per page")
-
-
 # ── CLI Analytics: /v1/analytics/cli-analytics/* ─────────────────────────────
 
 
