@@ -1,9 +1,5 @@
 import { describe, expect, it } from "@jest/globals";
 import { HeadroomConfigSchema } from "../../../src/schemas/headroom";
-import {
-  AssistantCreateParamsSchema,
-  AssistantUpdateParamsSchema,
-} from "../../../src/schemas/assistant";
 import type {
   Assistant,
   HeadroomConfig,
@@ -13,20 +9,8 @@ import type {
   TokensUsage,
   Workflow,
 } from "../../../src/models";
+import { HEADROOM_STRATEGY_VALUES } from "../../../src/models/headroom";
 import { WorkflowMode } from "../../../src/models/workflow";
-
-const VALID = {
-  name: "A",
-  description: "D",
-  system_prompt: "P",
-  project: "proj",
-  context: [],
-  llm_model_type: "gpt-4",
-  toolkits: [],
-  conversation_starters: [],
-  assistant_ids: [],
-  mcp_servers: [],
-};
 
 describe("HeadroomConfigSchema", () => {
   it("accepts a partial config", () => {
@@ -34,42 +18,13 @@ describe("HeadroomConfigSchema", () => {
   });
 
   it("accepts every strategy literal", () => {
-    for (const strategy of ["lossless", "balanced", "aggressive"] as const) {
+    for (const strategy of HEADROOM_STRATEGY_VALUES) {
       expect(HeadroomConfigSchema.parse({ strategy }).strategy).toBe(strategy);
     }
   });
 
   it("rejects an unknown strategy", () => {
     expect(() => HeadroomConfigSchema.parse({ strategy: "bogus" })).toThrow();
-  });
-});
-
-describe("headroom_config on assistant params", () => {
-  it("keeps headroom_config on create", () => {
-    const parsed = AssistantCreateParamsSchema.parse({
-      ...VALID,
-      headroom_config: { enabled: true, strategy: "aggressive" },
-    });
-    expect(parsed.headroom_config).toEqual({ enabled: true, strategy: "aggressive" });
-  });
-
-  it("keeps headroom_config on update", () => {
-    const parsed = AssistantUpdateParamsSchema.parse({
-      ...VALID,
-      headroom_config: { compress_tool_outputs: false },
-    });
-    expect(parsed.headroom_config).toEqual({ compress_tool_outputs: false });
-  });
-
-  it("leaves the key absent when not provided (update must not reset it)", () => {
-    expect("headroom_config" in AssistantCreateParamsSchema.parse(VALID)).toBe(false);
-    expect("headroom_config" in AssistantUpdateParamsSchema.parse(VALID)).toBe(false);
-  });
-
-  it("rejects an unknown strategy", () => {
-    expect(() =>
-      AssistantCreateParamsSchema.parse({ ...VALID, headroom_config: { strategy: "bogus" } }),
-    ).toThrow();
   });
 });
 

@@ -18,9 +18,11 @@ describe("AnalyticsService headroom", () => {
       put: jest.fn(),
       delete: jest.fn(),
       stream: jest.fn(),
+      request: jest.fn(),
+      throwIfResponseError: jest.fn(),
     } as unknown as jest.Mocked<ApiRequestHandler>;
     (ApiRequestHandler as jest.Mock).mockImplementation(() => apiHandler);
-    service = new AnalyticsService({ apiDomain: "https://api.example.com", token: "t" } as never);
+    service = new AnalyticsService({ apiDomain: "https://api.example.com", token: "t" });
   });
 
   const filters = {

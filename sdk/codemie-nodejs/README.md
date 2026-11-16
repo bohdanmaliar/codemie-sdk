@@ -15,6 +15,7 @@ TypeScript/JavaScript SDK for CodeMie services. This SDK provides a comprehensiv
     - [LLM Service](#llm-service)
     - [Assistant Service](#assistant-service)
       - [Core Methods](#core-methods)
+      - [Headroom (token compression)](#headroom-token-compression)
       - [Advanced Features](#advanced-features)
     - [Datasource Service](#datasource-service)
       - [Supported Datasource Types](#supported-datasource-types)
