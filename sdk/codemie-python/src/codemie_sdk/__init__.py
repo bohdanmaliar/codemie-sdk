@@ -93,6 +93,7 @@ from .models.analytics import (
     SummariesResponse,
     TabularResponse,
     UsersListResponse,
+    AnalyticsDetailResponse,
     AnalyticsQueryParams,
     PaginatedAnalyticsQueryParams,
     CliAnalyticsQueryParams,
@@ -102,6 +103,7 @@ from .models.analytics import (
     CliAnalyticsSessionsResponse,
     CliAnalyticsSessionDetailResponse,
     CliAnalyticsRepositoriesResponse,
+    CliInsightsUserDetailQueryParams,
 )
 from .models.headroom import (
     HeadroomConfig,
@@ -168,6 +170,8 @@ from .models.assistant import (
     BuiltinSubagent,
 )
 from .models.integration import (
+    IntegrationListPagination,
+    PaginatedIntegrationResponse,
     TransferMode,
     TransferItem,
     TransferSettingsResponse,
@@ -219,6 +223,40 @@ from .models.provisioning import (
     ProvisioningBudgetResult,
 )
 from .services.provisioning import ProvisioningService
+from .services.export import ExportService
+from .models.hosted_application import (
+    HostedApplication,
+    HostedApplicationCapabilities,
+    HostedApplicationCategory,
+    HostedApplicationCreator,
+    HostedApplicationDeletion,
+    HostedApplicationDeletionStatus,
+    HostedApplicationLaunch,
+    HostedApplicationList,
+    HostedApplicationSharableUsers,
+    HostedApplicationSharedWith,
+    HostedApplicationShareLink,
+    HostedApplicationShareLinkInfo,
+    HostedApplicationShareLinkTarget,
+    HostedApplicationUploadReceipt,
+    HostedApplicationUsage,
+    HostedApplicationValidationReport,
+    HostedApplicationVersion,
+    HostedApplicationVersionList,
+    HostedApplicationVersionQueued,
+    HostedApplicationVersionStart,
+)
+from .services.hosted_application import HostedApplicationService
+from .models.scheduler import (
+    SchedulerLastRun,
+    SchedulerListItem,
+    SchedulerListResponse,
+    SchedulerPagination,
+    SchedulerProjectRef,
+    SchedulerResourceRef,
+    SchedulerSchedule,
+)
+from .services.scheduler import SchedulerService
 
 try:
     __version__ = _pkg_version("codemie-sdk-python")
@@ -307,6 +345,7 @@ __all__ = [
     "SummariesResponse",
     "TabularResponse",
     "UsersListResponse",
+    "AnalyticsDetailResponse",
     "AnalyticsQueryParams",
     "PaginatedAnalyticsQueryParams",
     "HeadroomConfig",
@@ -320,6 +359,7 @@ __all__ = [
     "CliAnalyticsSessionsResponse",
     "CliAnalyticsSessionDetailResponse",
     "CliAnalyticsRepositoriesResponse",
+    "CliInsightsUserDetailQueryParams",
     "AnalyticsService",
     "CustomerConfigService",
     "MermaidDiagramRequest",
@@ -349,6 +389,8 @@ __all__ = [
     "SkillPagination",
     "SkillService",
     "BuiltinSubagent",
+    "IntegrationListPagination",
+    "PaginatedIntegrationResponse",
     "TransferMode",
     "TransferItem",
     "TransferSettingsResponse",
@@ -375,6 +417,7 @@ __all__ = [
     "ProvisioningBudgetResponse",
     "ProvisioningBudgetResult",
     "ProvisioningService",
+    "ExportService",
     "MarketplaceStatusFilter",
     "MarketplaceGateResult",
     "MarketplacePendingOrderBy",
@@ -391,4 +434,33 @@ __all__ = [
     "MarketplaceForcePublishResponse",
     "MarketplaceDecisionRequest",
     "MarketplaceManagementService",
+    "HostedApplication",
+    "HostedApplicationCapabilities",
+    "HostedApplicationCategory",
+    "HostedApplicationCreator",
+    "HostedApplicationDeletion",
+    "HostedApplicationDeletionStatus",
+    "HostedApplicationLaunch",
+    "HostedApplicationList",
+    "HostedApplicationSharableUsers",
+    "HostedApplicationSharedWith",
+    "HostedApplicationShareLink",
+    "HostedApplicationShareLinkInfo",
+    "HostedApplicationShareLinkTarget",
+    "HostedApplicationUploadReceipt",
+    "HostedApplicationUsage",
+    "HostedApplicationValidationReport",
+    "HostedApplicationVersion",
+    "HostedApplicationVersionList",
+    "HostedApplicationVersionQueued",
+    "HostedApplicationVersionStart",
+    "HostedApplicationService",
+    "SchedulerLastRun",
+    "SchedulerListItem",
+    "SchedulerListResponse",
+    "SchedulerPagination",
+    "SchedulerProjectRef",
+    "SchedulerResourceRef",
+    "SchedulerSchedule",
+    "SchedulerService",
 ]

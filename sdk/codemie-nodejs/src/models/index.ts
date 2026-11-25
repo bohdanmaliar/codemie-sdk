@@ -13,4 +13,5 @@ export * from "./task";
 export * from "./user";
 export * from "./category";
 export * from "./skill";
+export * from "./project";
 export * from "./workflow";

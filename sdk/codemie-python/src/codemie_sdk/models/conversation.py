@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -190,6 +191,7 @@ class ConversationDetails(BaseModel):
     category: str | None
     mcp_server_single_usage: bool | None = False
     finished_at: datetime | None = None
+    attributes: dict[str, str] | None = None
 
 
 class ConversationShareRequest(BaseModel):
@@ -373,6 +375,25 @@ class FeedbackCreateResponse(BaseModel):
     """Response for POST /v1/feedback: the id of the stored feedback entry."""
 
     id: str
+
+
+class FeedbackEntry(BaseModel):
+    """A stored feedback entry as returned by GET /v1/feedback and GET /v1/feedback/{id}."""
+
+    model_config = ConfigDict(populate_by_name=True, extra="ignore")
+
+    id: str
+    request: str
+    response: str
+    mark: FeedbackMark
+    conversation_id: str = Field(alias="conversationId")
+    comments: str | None = None
+    date: datetime | None = None
+    update_date: datetime | None = None
+    history: list[dict[str, Any]] | None = None
+    app_name: str | None = Field(default=None, alias="appName")
+    repo_name: str | None = Field(default=None, alias="repoName")
+    index_type: str | None = Field(default=None, alias="indexType")
 
 
 class FeedbackDeleteRequest(BaseModel):
